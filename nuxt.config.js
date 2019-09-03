@@ -23,11 +23,14 @@ export default {
   /*
    ** Global CSS
    */
-  css: ['ant-design-vue/dist/antd.css'],
+  css: ['ant-design-vue/dist/antd.css', 'video.js/dist/video-js.css'],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: ['@/plugins/antd-ui'],
+
+  script: [{ src: 'videojs-youtube/dist/Youtube.min.js' }],
+
   /*
    ** Nuxt.js dev-modules
    */
