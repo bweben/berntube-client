@@ -1,12 +1,18 @@
-import { AxiosInstance as axios } from 'axios'
+export const state = () => ({
+  selected: {}
+})
 
-export const room = () => ({})
-
-export const mutations = {}
+export const mutations = {
+  set(state, room) {
+    state.selected = room
+  }
+}
 
 export const actions = {
-  async GET_STORE({ commit }) {
-    const { data } = await axios.get('localhost:5000/api/v1/room/')
-    commit('SET_ROOM', data)
+  async get({ commit }, id) {
+    const room = await this.$axios.$get(
+      `http://localhost:5000/api/v1/room/${id}`
+    )
+    commit('set', room)
   }
 }
