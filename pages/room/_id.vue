@@ -1,8 +1,12 @@
 <template>
-  <div>
-    <h1>{{ room && room.Name }}</h1>
-    <bt-video-player :options="videoOptions"></bt-video-player>
-  </div>
+  <a-layout>
+    <a-layout-header class="header">
+      Room: {{ room && room.Name }}
+    </a-layout-header>
+    <a-layout-content class="content">
+      <bt-video-player :options="videoOptions"></bt-video-player>
+    </a-layout-content>
+  </a-layout>
 </template>
 
 <script>
@@ -12,8 +16,16 @@ export default {
   components: { BtVideoPlayer },
   data() {
     return {
-      id: this.$route.params.id,
-      videoOptions: {
+      id: this.$route.params.id
+    }
+  },
+
+  computed: {
+    room() {
+      return this.$store.state.room.selected
+    },
+    videoOptions() {
+      return {
         autoplay: true,
         controls: true,
         techOrder: ['youtube'],
@@ -30,14 +42,19 @@ export default {
     }
   },
 
-  computed: {
-    room() {
-      return this.$store.state.room.selected
-    }
-  },
-
   async fetch({ store, params }) {
     await store.dispatch('room/get', params.id)
   }
 }
 </script>
+<style scoped>
+.header {
+  color: white;
+}
+
+.content {
+  padding: 15px;
+  width: 80%;
+  margin: auto;
+}
+</style>
