@@ -8,27 +8,20 @@
       <h2 class="subtitle">
         Watch Videos together
       </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+      <div class="rooms">
+        <bt-room-list />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import BtRoomList from '../components/BtRoomList'
 import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
+    BtRoomList,
     Logo
   }
 }
@@ -60,9 +53,5 @@ export default {
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
