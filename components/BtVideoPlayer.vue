@@ -36,6 +36,10 @@ export default {
         console.log('onPlayerReady', this)
       }
     )
+
+    this.player.on('ended', function() {
+      console.log('video ended')
+    })
   },
 
   beforeDestroy() {
