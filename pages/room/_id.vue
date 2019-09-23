@@ -11,6 +11,7 @@
 
 <script>
 import BtVideoPlayer from '../../components/BtVideoPlayer'
+import socket from '../../plugins/socket.io'
 
 export default {
   components: { BtVideoPlayer },
@@ -44,6 +45,10 @@ export default {
 
   async fetch({ store, params }) {
     await store.dispatch('room/get', params.id)
+  },
+
+  beforeMount() {
+    socket.emit('test', 'hello world')
   }
 }
 </script>
