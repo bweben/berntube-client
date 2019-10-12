@@ -29,17 +29,26 @@ export default {
   },
 
   mounted() {
-    this.player = videojs(
-      this.$refs.videoPlayer,
-      this.options,
-      function onPlayerReady() {
-        console.log('onPlayerReady', this)
-      }
-    )
+    this.player = videojs(this.$refs.videoPlayer, {
+      autoplay: true,
+      controls: true,
+      fluid: true
+    })
 
     this.player.on('ended', function() {
       console.log('video ended')
     })
+  },
+
+  watch: {
+    options(newValue, oldValue) {
+      this.player.options = newValue
+      console.log(newValue.sources[0])
+      this.player.src(newValue.sources[0])
+      this.player.ready(() => {
+        this.player.play()
+      })
+    }
   },
 
   beforeDestroy() {

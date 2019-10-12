@@ -14,5 +14,9 @@ export const actions = {
       `http://localhost:5000/api/v1/room/${id}`
     )
     commit('set', room)
+  },
+
+  update({ commit }, room) {
+    commit('set', room)
   }
 }
