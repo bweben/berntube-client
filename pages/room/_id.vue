@@ -9,14 +9,26 @@
       />
     </a-layout-header>
     <a-layout-content class="content">
-      <bt-video-player :options="videoOptions"></bt-video-player>
+      <bt-video-player
+        v-if="
+          videoOptions.sources.length === 1 &&
+            videoOptions.sources[0].src.indexOf('youtu') === -1
+        "
+        :options="videoOptions"
+      ></bt-video-player>
+      <bt-yt-video-player v-else :options="videoOptions"></bt-yt-video-player>
     </a-layout-content>
   </a-layout>
 </template>
 
 <script>
 import io from 'socket.io-client'
+import Vue from 'vue'
+import VueYouTubeEmbed from 'vue-youtube-embed'
 import BtVideoPlayer from '../../components/BtVideoPlayer'
+import BtYtVideoPlayer from '../../components/BtYtVideoPlayer'
+
+Vue.use(VueYouTubeEmbed)
 
 export default {
   mounted() {
@@ -31,7 +43,7 @@ export default {
     })
   },
 
-  components: { BtVideoPlayer },
+  components: { BtVideoPlayer, BtYtVideoPlayer },
   data() {
     return {
       id: this.$route.params.id,
@@ -40,7 +52,8 @@ export default {
         autoplay: true,
         controls: true,
         techOrder: ['youtube'],
-        fluid: true
+        fluid: true,
+        sources: []
       }
     }
   },
@@ -87,5 +100,9 @@ export default {
 .half-width {
   margin-left: 20px;
   width: 50%;
+}
+
+.full-height {
+  height: 100%;
 }
 </style>
