@@ -22,12 +22,12 @@ $ yarn generate
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
 
 ## Todo
-- [] ability to seek
-- [] fix connection issues
-- [] rework design
-- [] refactor / dry etc
-- [] create / update / delete room
-- [] proper room overview
-- [] video queue
-- [] chat
-- [] different providers (vimeo / etc)
+- [ ] ability to seek
+- [ ] fix connection issues
+- [ ] rework design
+- [ ] refactor / dry etc
+- [ ] create / update / delete room
+- [ ] proper room overview
+- [ ] video queue
+- [ ] chat
+- [ ] different providers (vimeo / etc)
