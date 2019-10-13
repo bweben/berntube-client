@@ -7,6 +7,10 @@
       class="full-height"
       :player-width="'100%'"
       :player-height="'100%'"
+      @ready="ready"
+      @playing="play"
+      @paused="pause"
+      @ended="ended"
     ></youtube>
   </div>
 </template>
@@ -22,6 +26,43 @@ export default {
       type: Object,
       default() {
         return {}
+      }
+    },
+    playing: {
+      type: Boolean,
+      default() {
+        return true
+      }
+    }
+  },
+
+  methods: {
+    ready(event) {
+      this.player = event.target
+    },
+
+    play() {
+      this.player.playVideo()
+      this.$emit('play', true)
+    },
+
+    pause() {
+      console.log('original pause')
+      this.player.pauseVideo()
+      this.$emit('pause', true)
+    },
+
+    ended() {
+      this.$emit('ended', true)
+    }
+  },
+
+  watch: {
+    playing(newPlaying, oldPlaying) {
+      if (newPlaying) {
+        this.play()
+      } else {
+        this.pause()
       }
     }
   },
