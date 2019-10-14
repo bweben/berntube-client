@@ -5,8 +5,8 @@
     </a-list-item>
   </a-list>
 </template>
-<script>
-const data = [
+<script lang="ts">
+const data: { id: number; name: string }[] = [
   {
     id: 1,
     name: 'BärnBoys Room'
