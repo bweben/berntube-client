@@ -7,6 +7,7 @@
       class="full-height"
       :player-width="'100%'"
       :player-height="'100%'"
+      :host="'https://www.youtube-nocookie.com'"
       @ready="ready"
       @playing="play"
       @paused="pause"
