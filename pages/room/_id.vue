@@ -77,7 +77,7 @@ export default {
   },
 
   created() {
-    this.$store.subscribe((mutation, state) => {
+    this.$store.subscribe((_, state) => {
       this.videoOptions = {
         ...this.videoOptions,
         sources: [

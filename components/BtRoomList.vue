@@ -6,7 +6,12 @@
   </a-list>
 </template>
 <script lang="ts">
-const data: { id: number; name: string }[] = [
+interface BasicRoom {
+  id: number
+  name: string
+}
+
+const data: BasicRoom[] = [
   {
     id: 1,
     name: 'BärnBoys Room'
