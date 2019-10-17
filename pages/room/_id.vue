@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import io from 'socket.io-client'
 import Vue from 'vue'
+import io from 'socket.io-client'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 import BtVideoPlayer from '../../components/BtVideoPlayer'
 import BtYtVideoPlayer from '../../components/BtYtVideoPlayer'
