@@ -59,7 +59,7 @@ export default {
   },
 
   watch: {
-    playing(newPlaying, oldPlaying) {
+    playing(newPlaying, _) {
       if (newPlaying) {
         this.play()
       } else {

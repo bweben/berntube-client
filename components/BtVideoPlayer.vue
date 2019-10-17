@@ -41,7 +41,7 @@ export default {
   },
 
   watch: {
-    options(newValue, oldValue) {
+    options(newValue, _) {
       this.player.options = newValue
       console.log(newValue.sources[0])
       this.player.src(newValue.sources[0])

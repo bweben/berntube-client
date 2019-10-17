@@ -1,7 +1,9 @@
 <template>
   <a-list item-layout="horizontal" :data-source="data">
     <a-list-item slot="renderItem" slot-scope="item">
-      <nuxt-link :to="'/room/' + item.id">{{ item.name }}</nuxt-link>
+      <nuxt-link :to="'/room/' + item.id">
+        {{ item.name }}
+      </nuxt-link>
     </a-list-item>
   </a-list>
 </template>
