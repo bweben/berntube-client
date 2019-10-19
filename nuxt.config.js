@@ -27,7 +27,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/antd-ui'],
+  plugins: ['@/plugins/antd-ui', '@/plugins/youtube', '@/plugins/socket.io'],
 
   script: [{ src: 'videojs-youtube/dist/Youtube.min.js' }],
 

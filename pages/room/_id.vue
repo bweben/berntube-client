@@ -29,29 +29,12 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import io from 'socket.io-client'
-import VueYouTubeEmbed from 'vue-youtube-embed'
 import BtVideoPlayer from '../../components/BtVideoPlayer'
 import BtYtVideoPlayer from '../../components/BtYtVideoPlayer'
 
-Vue.use(VueYouTubeEmbed)
-
 export default {
   mounted() {
-    this.socket = io('http://localhost:5001')
-
-    this.socket.emit('join', this.id)
-
-    this.socket.on('link-update', (data) => {
-      console.log('link-update')
-      console.log(data)
-      this.$store.dispatch('room/update', data)
-    })
-
-    this.socket.on('playing', (playing) => {
-      this.playing = playing
-    })
+    this.$socket.emit('join', this.id)
   },
 
   components: { BtVideoPlayer, BtYtVideoPlayer },
@@ -65,14 +48,17 @@ export default {
         techOrder: ['youtube'],
         fluid: true,
         sources: []
-      },
-      playing: true
+      }
     }
   },
 
   computed: {
     room() {
       return this.$store.state.room.selected
+    },
+
+    playing() {
+      return this.$store.state.room.playing || true
     }
   },
 
@@ -92,22 +78,22 @@ export default {
 
   methods: {
     changeVideo(url) {
-      this.socket.emit('link', url)
+      this.$socket.emit('link', url)
     },
 
     play() {
       console.log('play')
-      this.socket.emit('play', true)
+      this.$socket.emit('play', true)
     },
 
     pause() {
       console.log('pause')
-      this.socket.emit('pause', true)
+      this.$socket.emit('pause', true)
     },
 
     ended() {
       console.log('ended')
-      this.socket.emit('ended', true)
+      this.$socket.emit('ended', true)
     }
   }
 }
