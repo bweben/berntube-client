@@ -1,5 +1,5 @@
 # build stage
-FROM node:lts-alpine as builde-stage
+FROM node:lts-alpine as build-stage
 WORKDIR /app
 RUN npm install -g yarn
 COPY package*.json ./

@@ -1,4 +1,5 @@
 import io from 'socket.io-client'
+
 const socket = io('http://localhost:5001')
 
 export const state = () => ({
@@ -10,7 +11,7 @@ export const mutations = {
     state.selected = room
   },
 
-  join(state, id) {
+  join(_, id) {
     socket.emit('join', id)
   }
 }
