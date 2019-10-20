@@ -9,9 +9,10 @@
       :player-height="'100%'"
       :host="'https://www.youtube-nocookie.com'"
       @ready="ready"
-      @playing="play"
-      @paused="pause"
+      @paused="onPaused"
+      @playing="onPlay"
       @ended="ended"
+      @seeked="onSeeked"
     ></youtube>
   </div>
 </template>
@@ -22,17 +23,21 @@ import { getIdFromURL, getTimeFromURL } from 'vue-youtube-embed'
 export default {
   name: 'BtYtVideoPlayer',
 
+  created() {
+    this.$store.subscribe((_, state) => {
+      if (state.room.playing) {
+        this.play()
+      } else {
+        this.pause()
+      }
+    })
+  },
+
   props: {
     options: {
       type: Object,
       default() {
         return {}
-      }
-    },
-    playing: {
-      type: Boolean,
-      default() {
-        return true
       }
     }
   },
@@ -43,28 +48,33 @@ export default {
     },
 
     play() {
-      this.player.playVideo()
-      this.$emit('play', true)
+      if (this.player) {
+        this.player.playVideo()
+      }
     },
 
     pause() {
-      console.log('original pause')
-      this.player.pauseVideo()
-      this.$emit('pause', true)
+      if (this.player) {
+        this.player.pauseVideo()
+      }
+    },
+
+    onPaused() {
+      this.pause()
+      this.$socket.emit('pause', true)
+    },
+
+    onPlay() {
+      this.play()
+      this.$socket.emit('play', true)
+    },
+
+    onSeeked() {
+      console.log('seeked')
     },
 
     ended() {
-      this.$emit('ended', true)
-    }
-  },
-
-  watch: {
-    playing(newPlaying, _) {
-      if (newPlaying) {
-        this.play()
-      } else {
-        this.pause()
-      }
+      this.$socket.emit('ended', true)
     }
   },
 
@@ -78,7 +88,6 @@ export default {
     videoOptions() {
       if (this.options.sources.length === 1) {
         const timeFromURL = getTimeFromURL(this.options.sources[0].src)
-        console.log(timeFromURL)
         return { start: timeFromURL, autoplay: 1 }
       } else {
         return {}

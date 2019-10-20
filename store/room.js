@@ -1,5 +1,6 @@
 export const state = () => ({
-  selected: {}
+  selected: {},
+  playing: true
 })
 
 export const mutations = {

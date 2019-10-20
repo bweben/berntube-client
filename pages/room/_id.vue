@@ -16,14 +16,7 @@
         "
         :options="videoOptions"
       ></bt-video-player>
-      <bt-yt-video-player
-        v-else
-        :options="videoOptions"
-        :playing="playing"
-        @play="play"
-        @pause="pause"
-        @ended="ended"
-      ></bt-yt-video-player>
+      <bt-yt-video-player v-else :options="videoOptions"></bt-yt-video-player>
     </a-layout-content>
   </a-layout>
 </template>
@@ -41,7 +34,6 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      socket: {},
       videoOptions: {
         autoplay: true,
         controls: true,
@@ -55,10 +47,6 @@ export default {
   computed: {
     room() {
       return this.$store.state.room.selected
-    },
-
-    playing() {
-      return this.$store.state.room.playing || true
     }
   },
 
@@ -79,21 +67,6 @@ export default {
   methods: {
     changeVideo(url) {
       this.$socket.emit('link', url)
-    },
-
-    play() {
-      console.log('play')
-      this.$socket.emit('play', true)
-    },
-
-    pause() {
-      console.log('pause')
-      this.$socket.emit('pause', true)
-    },
-
-    ended() {
-      console.log('ended')
-      this.$socket.emit('ended', true)
     }
   }
 }
