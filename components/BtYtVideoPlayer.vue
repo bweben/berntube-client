@@ -12,7 +12,7 @@
       @paused="onPaused"
       @playing="onPlay"
       @ended="ended"
-      @seeked="onSeeked"
+      @cued="onSeeked"
     ></youtube>
   </div>
 </template>
