@@ -1,3 +1,5 @@
+import Symbol_observable from 'symbol-observable'
+
 require('browser-env')()
 const hooks = require('require-extension-hooks')
 const Vue = require('vue')
